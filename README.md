@@ -1,3 +1,3 @@
 # Hearts of React
 
-Easily calculate your hearts game with this app built with React components.
+Keep track of your score in Hearts in this app built in React
