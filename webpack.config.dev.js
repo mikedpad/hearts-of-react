@@ -6,26 +6,48 @@ const { CleanWebpackPlugin } = require(`clean-webpack-plugin`);
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const SOURCE_PATH = path.resolve(__dirname, `src`);
+const DIST_PATH = path.resolve(__dirname, `dist`);
+const DEVSERVER_PORT = 3000;
+// const DEVSERVER_HOST = '192.168.1.101';
+const DEVSERVER_HOST = `localhost`;
+const DEVSERVER_ADDRESS = `http://${DEVSERVER_HOST}:${DEVSERVER_PORT}/`;
 
 module.exports = {
   mode: `development`,
-  entry: `./src/app.js`,
+  entry: {
+    main: [
+      `webpack-dev-server/client?${DEVSERVER_ADDRESS}`,
+      `webpack/hot/only-dev-server`,
+      `./src/entry.js`,
+    ],
+  },
   output: {
     filename: `bundle.js`,
+    path: DIST_PATH,
     publicPath: `/`,
+  },
+  resolve: {
+    extensions: [`*`, `.js`, `.jsx`],
+    // modules: [`src`, `node_modules`, path.resolve(SOURCE_PATH, `components`)],
   },
   devtool: `inline-source-map`,
   module: {
     rules: [
       {
-        test: /\.jsx?/,
+        test: /\.html?/,
         include: SOURCE_PATH,
         use: {
-          loader: `babel-loader`,
-          options: {
-            presets: [`@babel/preset-env`],
-          },
+          loader: `html-loader`,
         },
+      },
+      {
+        test: /\.jsx?/,
+        include: SOURCE_PATH,
+        use: [
+          {
+            loader: `babel-loader`,
+          },
+        ],
       },
       {
         test: /\.scss$/,
@@ -40,6 +62,9 @@ module.exports = {
             loader: `css-loader`,
             options: {
               sourceMap: true,
+              importLoaders: 2,
+              modules: true,
+              localIdentName: `[name]_[local]__[sha512:hash:base64:5]`,
             },
           },
           {
@@ -92,7 +117,10 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ title: `Hearts of React` }),
+    new HtmlWebpackPlugin({
+      title: `Hearts of React`,
+      template: `./src/index.html`,
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     // new MiniCssExtractPlugin({
@@ -107,5 +135,16 @@ module.exports = {
     //   new UglifyJsPlugin()
     // ],
     noEmitOnErrors: true,
+  },
+  devServer: {
+    contentBase: DIST_PATH,
+    compress: true,
+    port: 3000,
+    historyApiFallback: true,
+    host: DEVSERVER_HOST,
+    hotOnly: true,
+    inline: true,
+    overlay: true,
+    publicPath: DEVSERVER_ADDRESS,
   },
 };

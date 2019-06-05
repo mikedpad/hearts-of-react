@@ -15,7 +15,12 @@
   },
   "root": true,
   "settings": {
-    "import/core-modules": ["react", "prop-types"]
+    "import/core-modules": ["react", "prop-types"],
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.dev.js"
+      }
+    }
   },
   "rules": {
     "jsx-quotes": [2, "prefer-single"],

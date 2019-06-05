@@ -1,10 +1,13 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
+import Header from './components/Header/Header';
 
-const HomePage = () => (
+export default () => (
   <>
-    <h1>Title of page</h1>
-    <p>This is a sample page</p>
+    <Helmet>
+      <title>This is a page title</title>
+    </Helmet>
+    <Header />
+    <p>Lorem ipsum dolor sit amet...</p>
   </>
 );
-
-export default HomePage;
