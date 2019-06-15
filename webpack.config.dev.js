@@ -2,13 +2,10 @@ const path = require(`path`);
 const webpack = require(`webpack`);
 const HtmlWebpackPlugin = require(`html-webpack-plugin`);
 const { CleanWebpackPlugin } = require(`clean-webpack-plugin`);
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const SOURCE_PATH = path.resolve(__dirname, `src`);
 const DIST_PATH = path.resolve(__dirname, `dist`);
 const DEVSERVER_PORT = 3000;
-// const DEVSERVER_HOST = '192.168.1.101';
 const DEVSERVER_HOST = `localhost`;
 const DEVSERVER_ADDRESS = `http://${DEVSERVER_HOST}:${DEVSERVER_PORT}/`;
 
@@ -28,7 +25,6 @@ module.exports = {
   },
   resolve: {
     extensions: [`*`, `.js`, `.jsx`],
-    // modules: [`src`, `node_modules`, path.resolve(SOURCE_PATH, `components`)],
   },
   devtool: `inline-source-map`,
   module: {
@@ -46,40 +42,6 @@ module.exports = {
         use: [
           {
             loader: `babel-loader`,
-          },
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: `style-loader`,
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: `css-loader`,
-            options: {
-              sourceMap: true,
-              importLoaders: 2,
-              modules: true,
-              localIdentName: `[name]_[local]__[sha512:hash:base64:5]`,
-            },
-          },
-          {
-            loader: `postcss-loader`,
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: `sass-loader`,
-            options: {
-              sourceMap: true,
-              output: `expanded`,
-              includePaths: [path.resolve(`src/css`)],
-            },
           },
         ],
       },
@@ -118,22 +80,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: `Hearts of React`,
       template: `./src/index.html`,
     }),
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
-    // new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // both options are optional
-    //   filename: '[name].css',
-    //   chunkFilename: '[id].css',
-    // }),
   ],
   optimization: {
-    // minimizer: [
-    //   new UglifyJsPlugin()
-    // ],
     noEmitOnErrors: true,
   },
   devServer: {
