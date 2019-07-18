@@ -13,14 +13,20 @@
     },
     "sourceType": "module"
   },
+  "plugins": ["react-hooks"],
   "root": true,
   "settings": {
     "import/core-modules": ["react", "prop-types"]
   },
   "rules": {
-    "jsx-quotes": [2, "prefer-single"],
     "no-bitwise": [
       2,
+      {
+        "int32Hint": true
+      }
+    ],
+    "no-plusplus": [
+      0,
       {
         "int32Hint": true
       }
@@ -31,7 +37,13 @@
         "allowTernary": true
       }
     ],
-    "quotes": [2, "backtick"],
+    "quotes": [
+      2,
+      "backtick",
+      {
+        "avoidEscape": true
+      }
+    ],
     "import/extensions": [
       2,
       {
@@ -91,11 +103,13 @@
     "react/prop-types": [
       2,
       {
-        "ignore": ["children", "data"],
+        "ignore": ["children", "data", "pageContext", "location"],
         "customValidators": [],
         "skipUndeclared": false
       }
     ],
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "react-hooks/rules-of-hooks": 2,
+    "react-hooks/exhaustive-deps": 0
   }
 }
