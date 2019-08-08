@@ -1,35 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router } from '@reach/router';
-import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'polished';
-import { bg } from './styles/colors';
-import { sansSerif } from './styles/fonts';
-import Layout from './components/Layout';
-import MainMenu from './components/MainMenu';
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
+import Home from './components/Home';
+import Game from './components/Game';
 import NewGame from './components/NewGame';
-
-const GlobalStyle = createGlobalStyle`
-  ${normalize()}
-
-  :root {
-    background-color: ${bg};
-    font-family: ${sansSerif};
-  }
-`;
+import theme from './styles/theme';
 
 class Entry {
   constructor() {
+    // const responsiveTheme = responsiveFontSizes(theme);
     this.app = (
-      <>
-        <GlobalStyle />
-        <Layout>
-          <Router>
-            <MainMenu path='/' />
-            <NewGame path='/new' />
-          </Router>
-        </Layout>
-      </>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Home path="/" />
+          <Game path="game">
+            <NewGame path="/" />
+          </Game>
+        </Router>
+      </MuiThemeProvider>
     );
 
     this.run = () => {
