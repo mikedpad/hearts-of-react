@@ -5,19 +5,16 @@ import { makeStyles } from '@material-ui/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(theme => ({
-  menuButton: {
+  menuBtn: {
     marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
   },
-  shimToolbar: {
-    pointerEvents: `none`,
-  },
 }));
 
 const ToolbarMenu = ({ onMenuClick }) => {
-  const classes = useStyles();
+  const { menuBtn, title } = useStyles();
 
   return (
     <Toolbar>
@@ -25,12 +22,12 @@ const ToolbarMenu = ({ onMenuClick }) => {
         edge="start"
         color="inherit"
         aria-label="menu"
-        className={classes.menuButton}
+        className={menuBtn}
         onClick={onMenuClick}
       >
         <MenuIcon />
       </IconButton>
-      <Typography variant="h5" className={classes.title}>
+      <Typography variant="h5" className={title}>
         React Hearts
       </Typography>
     </Toolbar>
