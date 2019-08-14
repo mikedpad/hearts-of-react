@@ -1,36 +1,28 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Typography, Box, makeStyles, Zoom } from '@material-ui/core';
-import { styled } from '@material-ui/styles';
+import { Typography, Zoom } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import TextLink from './UI/TextLink';
 import ButtonLink from './UI/ButtonLink';
+import HeroBox from './UI/HeroBox';
 
 const useStyles = makeStyles(theme => ({
   newGameButton: {
     marginTop: theme.spacing(2),
   },
-  icon: {
-    marginLeft: theme.spacing(1),
+  title: {
+    display: `block`,
+    textAlign: `center`,
+    marginBottom: theme.spacing(2),
+  },
+  titleLink: {
+    color: `#fff`,
+    textDecoration: `none`,
   },
 }));
 
-const HeroBox = styled(Box)({
-  display: `flex`,
-  flexFlow: `column nowrap`,
-  justifyContent: `center`,
-  alignItems: `center`,
-  height: `100vh`,
-  width: `100vw`,
-});
-
-const TitleLink = styled(TextLink)({
-  color: `#fff`,
-  marginBottom: `1rem`,
-  fontWeight: `normal`,
-});
-
 const Home = () => {
-  const classes = useStyles();
+  const { titleLink, newGameButton, title } = useStyles();
 
   return (
     <>
@@ -40,8 +32,10 @@ const Home = () => {
       <main>
         <HeroBox>
           <Zoom in style={{ transitionDelay: `250ms` }}>
-            <Typography variant="h1" display="block">
-              <TitleLink to="/">React Hearts</TitleLink>
+            <Typography variant="h1" className={title}>
+              <TextLink to="/" className={titleLink}>
+                React Hearts
+              </TextLink>
             </Typography>
           </Zoom>
           <Zoom in style={{ transitionDelay: `500ms` }}>
@@ -50,7 +44,7 @@ const Home = () => {
               size="large"
               variant="contained"
               color="primary"
-              className={classes.newGameButton}
+              className={newGameButton}
             >
               New Game
             </ButtonLink>
