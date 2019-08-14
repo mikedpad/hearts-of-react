@@ -4,50 +4,44 @@ export default createMuiTheme({
   palette: {
     type: `light`,
     primary: {
-      main: `#19A13C`,
-      dark: `#0C7F2A`,
-      light: `#39AC57`,
-      contrastText: `#fff`,
+      main: `#36A1F4`,
+      light: `#8BC9F8`,
+      dark: `#047CD8`,
+      contrastText: `#FFF`,
     },
     secondary: {
-      main: `#187085`,
-      dark: `#0D5869`,
-      light: `#327D8E`,
-      contrastText: `#fff`,
+      main: `#FCB448`,
+      light: `#FFc46B`,
+      dark: `#ED991C`,
+      contrastText: `#FFF`,
     },
     error: {
-      main: `#830F00`,
+      main: `#CD1717`,
+      light: `E93D3D`,
+      dark: `A20707`,
       contrastText: `#fff`,
     },
-    divider: `#FF8B7B`,
+    divider: `rgba(255, 255, 255, 0.33)`,
     background: {
       paper: `#eee`,
-      default: `#D73621`,
+      default: `#CD1717`,
     },
   },
   typography: {
     fontFamily: `'Avenir Next', Roboto, 'Helvetica Neue', Arial, sans-serif`,
     htmlFontSize: 16,
   },
-  overrides: {
-    MuiButton: {
-      root: {
-        // backgroundColor: `limegreen`,
-        color: `white`,
-        fontWeight: `bold`,
-        margin: `1em`,
-        // '&:hover': {
-        //   backgroundColor: `mediumseagreen`,
-        // },
-      },
-    },
-    MuiLink: {
-      root: {
-        textDecoration: `none`,
-        '&:hover': {
-          textDecoration: `none`,
-        },
-      },
-    },
-  },
+  // overrides: {
+  //   MuiButton: {
+  //     root: {
+  //       backgroundColor: `limegreen`,
+  //       color: `white`,
+  //       fontWeight: `bold`,
+  //       margin: `1em`,
+  //       '&:hover': {
+  //         backgroundColor: `mediumseagreen`,
+  //       },
+  //     },
+  //   },
+  // },
 });
