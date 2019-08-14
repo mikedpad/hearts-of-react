@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router } from '@reach/router';
-import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
+import { CssBaseline, MuiThemeProvider, responsiveFontSizes } from '@material-ui/core';
 import Home from './components/Home';
 import Game from './components/Game';
 import NewGame from './components/NewGame';
@@ -9,9 +9,9 @@ import theme from './styles/theme';
 
 class Entry {
   constructor() {
-    // const responsiveTheme = responsiveFontSizes(theme);
+    const respTheme = responsiveFontSizes(theme);
     this.app = (
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={respTheme}>
         <CssBaseline />
         <Router>
           <Home path="/" />
