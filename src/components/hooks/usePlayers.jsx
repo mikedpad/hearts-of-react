@@ -1,4 +1,7 @@
 import React, { useState, useContext, useMemo, createContext } from 'react';
+import { useSnackbar } from 'notistack';
+import Player from '../../game/player';
+// import Rules from '../../game/rules';
 
 const PlayerContext = createContext();
 
@@ -7,21 +10,45 @@ function usePlayers() {
   if (!context) {
     throw new Error(`usePlayers must be used within a PlayerProvider`);
   }
+  const { enqueueSnackbar } = useSnackbar();
 
   const [players, setPlayers] = context;
 
-  const removePlayer = playerID => {
-    setPlayers(players.filter(player => player.id !== playerID));
+  const minPlayers = 3;
+  const maxPlayers = 7;
+
+  const snackbar = {
+    warning: {
+      maximumReached: () =>
+        enqueueSnackbar(`You have already reached the maximum amount of players! (7)`, {
+          variant: `warning`,
+        }),
+    },
   };
 
-  const addPlayer = newPlayer => {
-    setPlayers([...players, newPlayer]);
+  const isReadyToPlay = () => players.length >= minPlayers && players.length <= maxPlayers;
+  const isMaxPlayers = () => players.length === maxPlayers;
+
+  const addPlayer = playerName => {
+    if (players.length < maxPlayers) {
+      setPlayers([...players, new Player(playerName)]);
+      return;
+    }
+
+    snackbar.warning.maximumReached();
+  };
+
+  const removePlayer = playerID => {
+    setPlayers(players.filter(({ id }) => id !== playerID));
   };
 
   return {
     players,
     addPlayer,
     removePlayer,
+    isReadyToPlay,
+    isMaxPlayers,
+    snackbar,
   };
 }
 

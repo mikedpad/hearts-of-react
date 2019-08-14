@@ -1,39 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, makeStyles } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText, Divider, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import AddIcon from '@material-ui/icons/PersonAdd';
+import generateName from 'nomine-lipsum';
 import { usePlayers } from '../hooks/usePlayers';
-import Player from '../../game/player';
 import ToolbarMenu from './ToolbarMenu';
 
 const useStyles = makeStyles(theme => ({
-  // addPlayer: {
-  //   marginTop: theme.spacing(2),
-  // },
-  icon: {
-    marginRight: theme.spacing(1),
+  paper: {
+    backgroundColor: theme.palette.primary,
+    color: theme.palette.text,
   },
   list: {
     width: 250,
   },
+  icon: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const SideMenu = ({ closeDrawer }) => {
-  const classes = useStyles();
   const { addPlayer } = usePlayers();
+  const { paper, list, icon } = useStyles();
 
   const handleAddPlayerClick = () => {
-    addPlayer(new Player(`Mike`, 123));
+    addPlayer(generateName());
   };
 
   return (
-    <div className={classes.list} role="presentation" onClick={closeDrawer} onKeyDown={closeDrawer}>
-      <ToolbarMenu onMenuClick={closeDrawer} />
+    <div className={list} role="presentation" onClick={closeDrawer} onKeyDown={closeDrawer}>
+      <Paper square className={paper}>
+        <ToolbarMenu color="primary" onMenuClick={closeDrawer} />
+      </Paper>
       <Divider />
       <List>
         <ListItem button onClick={handleAddPlayerClick}>
           <ListItemIcon>
-            <AddIcon className={classes.icon} />
+            <AddIcon className={icon} />
           </ListItemIcon>
           <ListItemText>Add Players</ListItemText>
         </ListItem>
