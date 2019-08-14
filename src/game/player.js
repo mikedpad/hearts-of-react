@@ -1,10 +1,10 @@
 import { generate } from 'shortid';
 
 export default class Player {
-  constructor(name, score = 0) {
+  constructor(name, score) {
     this.id = generate();
     this.name = name;
-    this.score = score;
+    this.score = score || Math.floor(Math.random() * 100);
   }
 
   getName() {
