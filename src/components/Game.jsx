@@ -1,10 +1,9 @@
 import React from 'react';
 import { AppBar, Toolbar, Drawer, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { SnackbarProvider } from 'notistack';
 import { PlayerProvider } from './hooks/usePlayers';
-import SideMenu from './UI/SideMenu';
-import ToolbarMenu from './UI/ToolbarMenu';
+import SideMenu from './UI/Menu/SideMenu';
+import ToolbarHeader from './UI/App/ToolbarHeader';
 
 const useStyles = makeStyles(() => ({
   box: {
@@ -22,20 +21,16 @@ const Game = ({ children }) => {
   const closeDrawer = () => setMenuOpen(false);
 
   return (
-    <>
-      <SnackbarProvider maxSnack={3} autoHideDuration={3000} preventDuplicate>
-        <PlayerProvider>
-          <AppBar color="primary">
-            <ToolbarMenu extended onMenuClick={openDrawer} />
-          </AppBar>
-          <Toolbar className={shim} />
-          <Drawer open={isMenuOpen} onClose={closeDrawer}>
-            <SideMenu closeDrawer={closeDrawer} />
-          </Drawer>
-          <Box className={box}>{children}</Box>
-        </PlayerProvider>
-      </SnackbarProvider>
-    </>
+    <PlayerProvider>
+      <AppBar color="primary">
+        <ToolbarHeader extended onMenuClick={openDrawer} />
+      </AppBar>
+      <Toolbar className={shim} />
+      <Drawer open={isMenuOpen} onClose={closeDrawer}>
+        <SideMenu closeDrawer={closeDrawer} />
+      </Drawer>
+      <Box className={box}>{children}</Box>
+    </PlayerProvider>
   );
 };
 

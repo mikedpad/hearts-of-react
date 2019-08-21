@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ToolbarMenu = ({ onMenuClick }) => {
+const ToolbarHeader = ({ onMenuClick }) => {
   const { menuBtn, title } = useStyles();
 
   return (
@@ -34,8 +34,8 @@ const ToolbarMenu = ({ onMenuClick }) => {
   );
 };
 
-export default ToolbarMenu;
+export default ToolbarHeader;
 
-ToolbarMenu.propTypes = {
+ToolbarHeader.propTypes = {
   onMenuClick: PropTypes.func.isRequired,
 };

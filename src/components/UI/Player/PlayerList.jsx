@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     color: `#ffffff99`,
     textTransform: `uppercase`,
     lineHeight: `normal`,
-    padding: theme.spacing(0, 2, 1),
+    padding: theme.spacing(0),
   },
 }));
 
@@ -17,12 +17,14 @@ const PlayerList = ({ players }) => {
   const { subheader } = useStyles();
 
   return (
-    <List>
-      <ListSubheader className={subheader}>Players:</ListSubheader>
-      {players.map(player => (
-        <PlayerListEntry key={player.id} {...player} />
-      ))}
-    </List>
+    <>
+      <List component="div" aria-label="player list">
+        <ListSubheader className={subheader}>Players:</ListSubheader>
+        {players.map(player => (
+          <PlayerListEntry key={player.id} {...player} />
+        ))}
+      </List>
+    </>
   );
 };
 

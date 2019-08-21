@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, ListItemText, ListItemIcon, Fade, Paper } from '@material-ui/core';
+import { ListItem, ListItemText, ListItemIcon, Fade, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import MoreInfo from '../PopupMenu/MoreInfo';
+import MoreInfoIcon from '@material-ui/icons/MoreVert';
+import { useContextualMenu } from '../../hooks/useContextualMenu';
 
 const getScore = score => {
   const warningColor = score > 75 ? `#ff0044` : `#ffdf00`;
@@ -10,26 +11,24 @@ const getScore = score => {
 };
 
 const useStyles = makeStyles(theme => ({
-  playerPaper: {
-    margin: theme.spacing(2),
+  liPaper: {
+    margin: theme.spacing(2, 0),
+    width: `auto`,
+    padding: 0,
+    alignItems: `center`,
+    flexFlow: `row nowrap`,
   },
-  subheader: {
-    color: `#ffffff99`,
-    textTransform: `uppercase`,
-    lineHeight: `normal`,
-    padding: theme.spacing(0, 2, 1),
+  liText: {
+    fontSize: `1rem`,
   },
   liName: {
     flex: `1 1 auto`,
     margin: theme.spacing(0, 1, 0, 2),
-    fontSize: `1rem`,
   },
   liScore: {
     color: ({ score }) => getScore(score),
     flex: `0 1 auto`,
     margin: theme.spacing(0, 1),
-    fontSize: `1.25rem`,
-    textShadow: `#00000099 1px 1px 2px`,
   },
   liMoreInfo: {
     flex: `0 1 auto`,
@@ -41,19 +40,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PlayerListEntry = ({ id, name, score }) => {
-  const { playerPaper, liName, liScore, liMoreInfo } = useStyles({ score });
+  const { openMenu } = useContextualMenu();
+  const { liPaper, liText, liName, liScore, liMoreInfo, noEvents } = useStyles({ score });
 
   return (
     <Fade in>
-      <Paper className={playerPaper}>
-        <ListItem key={id} disableGutters>
-          <ListItemText className={liName} primary={name} disableTypography />
-          <ListItemText className={liScore} primary={score} disableTypography />
-          <ListItemIcon className={liMoreInfo}>
-            <MoreInfo id={id} name={name} score={score} />
-          </ListItemIcon>
-        </ListItem>
-      </Paper>
+      <ListItem key={id} className={liPaper}>
+        <ListItemText className={liName} primary={name} classes={{ primary: liText }} />
+        <ListItemText className={liScore} primary={score} classes={{ primary: liText }} />
+        <ListItemIcon className={liMoreInfo}>
+          <IconButton
+            onClick={openMenu}
+            classes={{
+              label: noEvents,
+            }}
+            aria-controls="contextual-menu"
+            aria-haspopup="true"
+            data-id={id}
+            data-name={name}
+          >
+            <MoreInfoIcon />
+          </IconButton>
+        </ListItemIcon>
+      </ListItem>
     </Fade>
   );
 };
