@@ -26,6 +26,7 @@
       }
     ],
     "no-console": [1, { "allow": ["warn", "error"] }],
+    "no-nested-ternary": 0,
     "no-plusplus": [
       0,
       {
@@ -36,6 +37,15 @@
       2,
       {
         "allowTernary": true
+      }
+    ],
+    "object-curly-newline": [
+      2,
+      {
+        "ObjectExpression": { "consistent": true },
+        "ObjectPattern": { "consistent": true },
+        "ImportDeclaration": { "multiline": true },
+        "ExportDeclaration": { "multiline": true }
       }
     ],
     "quotes": [
@@ -50,6 +60,12 @@
       {
         "js": "never",
         "json": "always"
+      }
+    ],
+    "import/order": [
+      2,
+      {
+        "newlines-between": "never"
       }
     ],
     "import/no-extraneous-dependencies": [
