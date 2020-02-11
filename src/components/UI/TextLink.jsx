@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Link as ReachLink } from '@reach/router';
 import { Link } from '@material-ui/core';

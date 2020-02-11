@@ -1,6 +1,6 @@
 import { generate } from 'shortid';
 
-export default class Player {
+class Player {
   constructor(name, score) {
     this.id = generate();
     this.name = name;
@@ -31,3 +31,5 @@ export default class Player {
     this.score = this.score - Number.parseInt(value, 10);
   }
 }
+
+export default Player;

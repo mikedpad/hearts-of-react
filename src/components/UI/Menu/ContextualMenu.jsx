@@ -4,22 +4,20 @@ import { Menu, MenuItem } from '@material-ui/core';
 import { useContextualMenu } from '../../hooks/useContextualMenu';
 
 const ContextualMenu = ({ menuItems }) => {
-  const { getAnchor, isMenuOpen, getID, closeMenu } = useContextualMenu();
-  const anchorEl = getAnchor();
-  const isOpen = isMenuOpen();
+  const { isMenuOpen, anchor, id, closeMenu } = useContextualMenu();
 
   return (
     <Menu
       id="contextual-menu"
       color="primary"
-      anchorEl={anchorEl}
+      anchorEl={anchor}
       keepMounted
-      open={isOpen}
+      open={isMenuOpen}
       onClose={closeMenu}
     >
       {menuItems.map(({ label, onClickFunc }) => {
         const onClick = () => {
-          onClickFunc(getID());
+          onClickFunc(id);
           closeMenu();
         };
 

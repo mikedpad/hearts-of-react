@@ -1,28 +1,32 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Typography, Zoom } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/styles';
-import TextLink from './UI/TextLink';
+import Typography from '@material-ui/core/Typography';
+import Zoom from '@material-ui/core/Zoom';
 import ButtonLink from './UI/ButtonLink';
-import HeroBox from './UI/HeroBox';
+import { useGameState } from './hooks/useGameState';
 
 const useStyles = makeStyles(theme => ({
-  newGameButton: {
-    marginTop: theme.spacing(2),
+  hero: {
+    display: `flex`,
+    flexFlow: `column nowrap`,
+    justifyContent: `space-around`,
+    alignItems: `center`,
+    height: `100vh`,
   },
   title: {
-    display: `block`,
+    fontFamily: theme.typography.headline,
+    fontSize: `5rem`,
+    margin: theme.spacing(1.5, 0),
+    textTransform: `uppercase`,
     textAlign: `center`,
-    marginBottom: theme.spacing(2),
-  },
-  titleLink: {
-    color: `#fff`,
-    textDecoration: `none`,
   },
 }));
 
 const Home = () => {
-  const { titleLink, newGameButton, title } = useStyles();
+  const { isInProgress } = useGameState();
+  const { hero, title } = useStyles();
 
   return (
     <>
@@ -30,26 +34,23 @@ const Home = () => {
         <title>React Hearts</title>
       </Helmet>
       <main>
-        <HeroBox>
+        <Container className={hero}>
           <Zoom in style={{ transitionDelay: `250ms` }}>
             <Typography variant="h1" className={title}>
-              <TextLink to="/" className={titleLink}>
-                React Hearts
-              </TextLink>
+              React Hearts
             </Typography>
           </Zoom>
           <Zoom in style={{ transitionDelay: `500ms` }}>
             <ButtonLink
-              to="/game"
-              size="large"
+              to={isInProgress ? `/game/play` : `/game/new`}
+              color={isInProgress ? `primary` : `secondary`}
               variant="contained"
-              color="primary"
-              className={newGameButton}
+              size="large"
             >
-              New Game
+              {isInProgress ? `Resume Game` : `Create Game`}
             </ButtonLink>
           </Zoom>
-        </HeroBox>
+        </Container>
       </main>
     </>
   );

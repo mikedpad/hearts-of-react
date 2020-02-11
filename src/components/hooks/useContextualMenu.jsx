@@ -6,14 +6,15 @@ const initialState = {
   isOpen: false,
   anchor: null,
   id: null,
-  name: null,
 };
 
 const menuReducer = (state, action) => {
   switch (action.type) {
     case `OPEN`:
       return {
-        ...action.payload,
+        ...state,
+        anchor: action.payload.anchor,
+        id: action.payload.id,
         isOpen: true,
       };
     case `CLOSE`:
@@ -33,18 +34,16 @@ const useContextualMenu = () => {
 
   const openMenu = evt => {
     const anchor = evt.currentTarget;
-    const { id, name } = evt.currentTarget.dataset;
-    dispatch({ type: `OPEN`, payload: { anchor, id, name } });
+    const { id } = evt.currentTarget.dataset;
+    dispatch({ type: `OPEN`, payload: { anchor, id } });
   };
 
-  const closeMenu = () => {
-    dispatch({ type: `CLOSE` });
-  };
+  const closeMenu = () => dispatch({ type: `CLOSE` });
 
   return {
-    isMenuOpen: () => state.isOpen,
-    getAnchor: () => state.anchor,
-    getID: () => state.id,
+    isMenuOpen: state.isOpen,
+    anchor: state.anchor,
+    id: state.id,
     openMenu,
     closeMenu,
   };

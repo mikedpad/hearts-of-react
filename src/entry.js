@@ -4,10 +4,12 @@ import { Router } from '@reach/router';
 import { CssBaseline, MuiThemeProvider, responsiveFontSizes } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
 import Home from './components/Home';
-import Game from './components/Game';
-import NewGame from './components/NewGame';
 import theme from './styles/theme';
 import { ContextualMenuProvider } from './components/hooks/useContextualMenu';
+import { GameStateProvider } from './components/hooks/useGameState';
+import NotFound from './components/Pages/NotFound';
+import NewGame from './components/Game/NewGame';
+import PlayGame from './components/Game/PlayGame';
 
 class Entry {
   constructor() {
@@ -17,12 +19,14 @@ class Entry {
         <CssBaseline />
         <SnackbarProvider maxSnack={3} autoHideDuration={3000} preventDuplicate>
           <ContextualMenuProvider>
-            <Router>
-              <Home path="/" />
-              <Game path="game">
-                <NewGame path="/" />
-              </Game>
-            </Router>
+            <GameStateProvider>
+              <Router>
+                <Home path="/" />
+                <NewGame path="/game/new" />
+                <PlayGame path="/game/play" />
+                <NotFound default />
+              </Router>
+            </GameStateProvider>
           </ContextualMenuProvider>
         </SnackbarProvider>
       </MuiThemeProvider>
