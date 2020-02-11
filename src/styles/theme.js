@@ -1,47 +1,69 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+const background = {
+  paper: `#EEE`,
+  default: `#fafafa`,
+};
+
+const baseFont = `'Avenir Next', Roboto, 'Helvetica Neue', Arial, sans-serif`;
+const fonts = {
+  headline: `Staatliches, ${baseFont}`,
+  body: `Dosis, ${baseFont}`,
+};
+
+const colors = {
+  red: {
+    main: `#cd1717`,
+    light: `#e93d3d`,
+    dark: `#a20707`,
+    contrastText: `#fff`,
+  },
+  green: {
+    main: `#5cb35c`,
+    light: `#8fd28f`,
+    dark: `#349234`,
+    contrastText: `#fff`,
+  },
+  blue: {
+    main: `#36a1f4`,
+    light: `#8bc9f8`,
+    dark: `#047cd8`,
+    contrastText: `#fff`,
+  },
+  gold: {
+    main: `#fcb448`,
+    light: `#ffc46B`,
+    dark: `#ed991c`,
+    contrastText: `#fff`,
+  },
+  gray: {
+    main: `#ccc`,
+    light: `#eee`,
+    dark: `#aaa`,
+    contrastText: `#000`,
+  },
+};
+
 export default createMuiTheme({
   palette: {
-    type: `light`,
-    primary: {
-      main: `#36A1F4`,
-      light: `#8BC9F8`,
-      dark: `#047CD8`,
-      contrastText: `#FFF`,
+    primary: colors.blue,
+    secondary: colors.green,
+    error: colors.red,
+    score: {
+      low: colors.green.light,
+      medium: colors.gold.main,
+      high: colors.red.dark,
     },
-    secondary: {
-      main: `#FCB448`,
-      light: `#FFc46B`,
-      dark: `#ED991C`,
-      contrastText: `#FFF`,
+    list: {
+      header: colors.gray.light,
+      headerBorder: colors.gray.dark,
     },
-    error: {
-      main: `#CD1717`,
-      light: `E93D3D`,
-      dark: `A20707`,
-      contrastText: `#fff`,
-    },
-    divider: `rgba(255, 255, 255, 0.33)`,
-    background: {
-      paper: `#eee`,
-      default: `#CD1717`,
-    },
+    background,
   },
   typography: {
-    fontFamily: `'Avenir Next', Roboto, 'Helvetica Neue', Arial, sans-serif`,
+    fontFamily: baseFont,
     htmlFontSize: 16,
+    headline: fonts.headline,
+    body: fonts.body,
   },
-  // overrides: {
-  //   MuiButton: {
-  //     root: {
-  //       backgroundColor: `limegreen`,
-  //       color: `white`,
-  //       fontWeight: `bold`,
-  //       margin: `1em`,
-  //       '&:hover': {
-  //         backgroundColor: `mediumseagreen`,
-  //       },
-  //     },
-  //   },
-  // },
 });
