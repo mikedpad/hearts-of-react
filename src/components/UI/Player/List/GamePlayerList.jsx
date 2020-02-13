@@ -46,7 +46,7 @@ const GamePlayerList = () => {
         </Typography>
       </ListSubheader>
       {players.map(({ id, name, score }) => (
-        <PlayerEntry key={id} name={name} score={score} />
+        <PlayerEntry key={id} id={id} name={name} score={score} />
       ))}
     </List>
   );

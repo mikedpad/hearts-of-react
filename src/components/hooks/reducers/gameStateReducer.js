@@ -1,4 +1,10 @@
-const reducer = (state, action) => {
+export const defaultState = {
+  isInProgress: false,
+  round: null,
+  players: [],
+};
+
+export const reducer = (state, action) => {
   switch (action.type) {
     case `NEW_GAME`:
       return {

@@ -3,16 +3,10 @@ import { useSnackbar } from 'notistack';
 const useSnackMessages = () => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const snackbarMessage = (message, variant) => enqueueSnackbar(message, { variant });
-
-  const msgSuccess = message => snackbarMessage(message, `success`);
-  const msgWarning = message => snackbarMessage(message, `warning`);
-  const msgError = message => snackbarMessage(message, `error`);
-
   return {
-    msgSuccess,
-    msgWarning,
-    msgError,
+    msgSuccess: msg => enqueueSnackbar(msg, { variant: `success` }),
+    msgWarning: msg => enqueueSnackbar(msg, { variant: `warning` }),
+    msgError: msg => enqueueSnackbar(msg, { variant: `error` }),
   };
 };
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  btnBox: {
+  btnDiv: {
     display: `flex`,
     flexFlow: `column nowrap`,
     justifyContent: `center`,
@@ -25,9 +24,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RoundIconButton = ({ label, onClick, Icon }) => {
-  const { btnBox, btn, btnLabel } = useStyles();
+  const { btnDiv, btn, btnLabel } = useStyles();
   return (
-    <Box className={btnBox}>
+    <div className={btnDiv}>
       <IconButton onClick={onClick} className={btn}>
         <Icon />
       </IconButton>
@@ -36,7 +35,7 @@ const RoundIconButton = ({ label, onClick, Icon }) => {
           {label}
         </Typography>
       )}
-    </Box>
+    </div>
   );
 };
 

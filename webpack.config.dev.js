@@ -7,7 +7,7 @@ const SOURCE_PATH = path.resolve(__dirname, `src`);
 const DIST_PATH = path.resolve(__dirname, `dist`);
 const DEVSERVER_PORT = 3000;
 const DEVSERVER_HOST = `localhost`;
-// const DEVSERVER_HOST = `192.168.1.101`;
+// const DEVSERVER_HOST = `192.168.1.103`;
 const DEVSERVER_ADDRESS = `http://${DEVSERVER_HOST}:${DEVSERVER_PORT}/`;
 
 module.exports = {

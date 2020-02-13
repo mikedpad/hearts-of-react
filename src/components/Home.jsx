@@ -1,10 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/styles';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
-import ButtonLink from './UI/ButtonLink';
+import { navigate } from '@reach/router';
 import { useGameState } from './hooks/useGameState';
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +27,10 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const { isInProgress } = useGameState();
-  const { hero, title } = useStyles();
+  const classes = useStyles();
+  const handleButtonClick = async () => {
+    await navigate(isInProgress ? `/game/play` : `/game/new`);
+  };
 
   return (
     <>
@@ -34,21 +38,16 @@ const Home = () => {
         <title>React Hearts</title>
       </Helmet>
       <main>
-        <Container className={hero}>
+        <Container className={classes.hero}>
           <Zoom in style={{ transitionDelay: `250ms` }}>
-            <Typography variant="h1" className={title}>
+            <Typography variant="h1" className={classes.title}>
               React Hearts
             </Typography>
           </Zoom>
           <Zoom in style={{ transitionDelay: `500ms` }}>
-            <ButtonLink
-              to={isInProgress ? `/game/play` : `/game/new`}
-              color={isInProgress ? `primary` : `secondary`}
-              variant="contained"
-              size="large"
-            >
+            <Button onClick={handleButtonClick} color="secondary" variant="contained" size="large">
               {isInProgress ? `Resume Game` : `Create Game`}
-            </ButtonLink>
+            </Button>
           </Zoom>
         </Container>
       </main>

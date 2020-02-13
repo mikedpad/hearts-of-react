@@ -24,11 +24,11 @@ class Player {
   }
 
   addScore(value) {
-    this.score = this.score + Number.parseInt(value, 10);
+    this.score += Number.parseInt(value, 10);
   }
 
   subtractScore(value) {
-    this.score = this.score - Number.parseInt(value, 10);
+    this.score -= Number.parseInt(value, 10);
   }
 }
 
