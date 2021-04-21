@@ -87,7 +87,7 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   optimization: {
-    noEmitOnErrors: true,
+    emitOnErrors: false,
   },
   devServer: {
     contentBase: DIST_PATH,
